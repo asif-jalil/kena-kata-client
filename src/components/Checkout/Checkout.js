@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Checkout.css";
 import { Card, Container, Table, Alert } from "react-bootstrap";
 import { useEffect } from "react";
 import { useState } from "react";
+import { userContext } from "../../App";
 
 const Checkout = () => {
   const [cart, setCart] = useState({});
   const [status, setStatus] = useState(false);
+  const [loggedUser] = useContext(userContext);
 
   useEffect(() => {
     const cartItem = JSON.parse(localStorage.getItem("cart"));
@@ -17,7 +19,7 @@ const Checkout = () => {
 
   const handleCheckout = () => {
     setStatus(false);
-    const order = { productName: cart.productName, price: cart.productPrice, weight: cart.productWeight, totalPrice, orderTime: new Date().toString() };
+    const order = { ...loggedUser, productName: cart.productName, price: cart.productPrice, weight: cart.productWeight, totalPrice, orderTime: new Date().toString() };
 
     fetch("http://localhost:5000/addOrder", {
       method: "POST",

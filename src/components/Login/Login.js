@@ -8,24 +8,22 @@ import { Card, Col, Container, Row, Button } from "react-bootstrap";
 import { userContext } from "../../App";
 import { useHistory, useLocation } from "react-router";
 
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
-}
+firebase.initializeApp(firebaseConfig);
 
 const Login = () => {
   const [loggedUser, setLoggedUser] = useContext(userContext);
-  const googleProvider = new firebase.auth.GoogleAuthProvider();
   const history = useHistory();
   let location = useLocation();
   let { from } = location.state || { from: { pathname: "/" } };
+
+  const googleProvider = new firebase.auth.GoogleAuthProvider();
 
   const handleGoogleLogin = () => {
     firebase
       .auth()
       .signInWithPopup(googleProvider)
       .then((result) => {
-        var user = result.user;
-        console.log(user);
+        const user = result.user;
         const name = user.displayName;
         const email = user.email;
         const photo = user.photoURL;
@@ -34,7 +32,7 @@ const Login = () => {
         history.replace(from);
       })
       .catch((error) => {
-        var errorMessage = error.message;
+        const errorMessage = error.message;
         console.log(errorMessage);
       });
   };
