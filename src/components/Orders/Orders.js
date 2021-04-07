@@ -30,6 +30,7 @@ const Orders = () => {
               <thead className="table-dark">
                 <tr>
                   <th>Ordered By</th>
+                  <th>Email</th>
                   <th>Product Details</th>
                   <th>Order Time</th>
                   <th>Total Cost</th>

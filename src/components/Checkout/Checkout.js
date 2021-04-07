@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import "./Checkout.css";
-import { Card, Container, Table, Alert, Modal } from "react-bootstrap";
+import { Card, Container, Table, Alert } from "react-bootstrap";
 import { useEffect } from "react";
 import { useState } from "react";
 import { userContext } from "../../App";
@@ -17,7 +17,7 @@ const Checkout = () => {
 
   let totalPrice = 1 * cart?.productPrice;
 
-  const handleCheckout = () => {
+  const handleCheckout = (event) => {
     setStatus(false);
     const order = { ...loggedUser, productName: cart.productName, price: cart.productPrice, weight: cart.productWeight, totalPrice, orderTime: new Date().toString() };
 
@@ -76,9 +76,15 @@ const Checkout = () => {
           </Card.Body>
         </Card>
         <div className="mt-3 d-flex justify-content-end">
-          <button onClick={handleCheckout} className="btn btn-lg main-btn">
-            Checkout
-          </button>
+          {status ? (
+            <button disabled className="btn btn-lg main-btn">
+              Checkout
+            </button>
+          ) : (
+            <button onClick={handleCheckout} className="btn btn-lg main-btn">
+              Checkout
+            </button>
+          )}
         </div>
       </Container>
     </section>
