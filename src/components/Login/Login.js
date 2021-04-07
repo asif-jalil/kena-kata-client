@@ -71,8 +71,8 @@ const Login = () => {
               <Card className="text-center shadow border-0">
                 <Card.Body>
                   <img src={loggedUser.photo} alt={loggedUser.name} className="mb-3" style={{ maxWidth: "150px" }} />
-                  <Card.Title>{loggedUser.name}</Card.Title>
-                  <Card.Subtitle>{loggedUser.email}</Card.Subtitle>
+                  <Card.Title>{loggedUser?.name}</Card.Title>
+                  <Card.Subtitle>{loggedUser?.email}</Card.Subtitle>
                   <Button className="mt-3" onClick={handleLogout} variant="danger">
                     Logout
                   </Button>

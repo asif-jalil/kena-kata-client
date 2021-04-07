@@ -29,7 +29,7 @@ const AdminHeader = ({ title }) => {
     <header className="d-flex bg-white justify-content-between align-items-center px-4 py-3">
       <h4>{title}</h4>
       <div className="d-flex align-items-center">
-        <h6 className="mb-0 mr-3">{loggedUser.name}</h6>
+        <h6 className="mb-0 mr-3">{loggedUser?.name}</h6>
         <Button onClick={handleLogout} variant="danger" size="sm">
           Logout <FontAwesomeIcon icon={["fas", "sign-out-alt"]} />
         </Button>
