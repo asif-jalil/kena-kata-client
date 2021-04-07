@@ -1,0 +1,11 @@
+.login {
+  padding: 80px 0;
+}
+
+.social-login {
+  margin-bottom: 30px;
+}
+
+.social-login .login-btn {
+  cursor: pointer;
+}

@@ -1,0 +1,10 @@
+.home {
+  position: relative;
+  min-height: calc(100vh - 62px);
+}
+
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}

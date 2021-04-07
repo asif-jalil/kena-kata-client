@@ -1,0 +1,11 @@
+.checkout {
+  padding: 80px 0;
+}
+
+.checkout-box {
+  border-radius: 12px;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  -ms-border-radius: 12px;
+  -o-border-radius: 12px;
+}

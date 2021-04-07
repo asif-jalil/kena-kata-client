@@ -1,0 +1,10 @@
+@media (max-width: 575px) {
+  .dashboard-card {
+    margin-bottom: 30px;
+  }
+}
+
+.dashboard-card svg {
+  font-size: 30px;
+  margin-bottom: 10px;
+}

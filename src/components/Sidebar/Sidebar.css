@@ -1,0 +1,41 @@
+.sidebar {
+  width: 300px;
+  position: fixed;
+  min-height: 100vh;
+}
+
+.nav-link {
+  color: #000;
+}
+
+.nav-link.active {
+  color: #FFBD3E;
+}
+
+.sidebar-toggle {
+  right: -40px;
+  top: 15px;
+  position: absolute;
+  z-index: 99;
+}
+
+@media (max-width: 1199px) {
+  .sidebar {
+    left: -300px;
+    z-index: 99;
+    transition: left 0.45s ease-in;
+    -webkit-transition: left 0.45s ease-in;
+    -moz-transition: left 0.45s ease-in;
+    -ms-transition: left 0.45s ease-in;
+    -o-transition: left 0.45s ease-in;
+  }
+
+  .sidebar.active {
+    left: 0;
+    box-shadow: 2px 0 6px 0 rgba(0, 0, 0, 0.4);
+  }
+
+  .sidebar-toggle {
+    right: -55px;
+  }
+}
