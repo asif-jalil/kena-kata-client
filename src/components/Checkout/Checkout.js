@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import "./Checkout.css";
-import { Card, Container, Table, Alert } from "react-bootstrap";
+import { Card, Container, Table, Alert, Modal } from "react-bootstrap";
 import { useEffect } from "react";
 import { useState } from "react";
 import { userContext } from "../../App";
@@ -21,7 +21,7 @@ const Checkout = () => {
     setStatus(false);
     const order = { ...loggedUser, productName: cart.productName, price: cart.productPrice, weight: cart.productWeight, totalPrice, orderTime: new Date().toString() };
 
-    fetch("http://localhost:5000/addOrder", {
+    fetch("https://kenakata.herokuapp.com/addOrder", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

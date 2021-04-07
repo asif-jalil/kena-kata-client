@@ -12,7 +12,7 @@ const ManageProduct = () => {
 
   useEffect(() => {
     setEmptyProduct(false);
-    fetch("http://localhost:5000/products")
+    fetch("https://kenakata.herokuapp.com/products")
       .then((res) => res.json())
       .then((data) => {
         if (data.length <= 0) {
@@ -25,7 +25,7 @@ const ManageProduct = () => {
 
   const handleDeleteProduct = (id) => {
     setStatus(false);
-    fetch(`http://localhost:5000/deleteProduct/${id}`, {
+    fetch(`https://kenakata.herokuapp.com/deleteProduct/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())

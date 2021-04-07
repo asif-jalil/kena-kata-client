@@ -26,7 +26,7 @@ const AddProduct = () => {
 
     if (uploadStatus === "uploading" || uploadStatus === "complete") {
       if (imgURL !== "") {
-        fetch("http://localhost:5000/addProduct", {
+        fetch("https://kenakata.herokuapp.com/addProduct", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

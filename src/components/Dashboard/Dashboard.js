@@ -9,7 +9,7 @@ const Dashboard = () => {
   const [totalProduct, setTotalProduct] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/products")
+    fetch("https://kenakata.herokuapp.com/products")
       .then((res) => res.json())
       .then((data) => {
         setTotalProduct(data);
