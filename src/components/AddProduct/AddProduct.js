@@ -126,7 +126,7 @@ const AddProduct = () => {
             </Col>
             <Col sm={12}>
               <button type="submit" className="btn main-btn">
-                Add Event
+                Add Product
               </button>
             </Col>
           </Row>

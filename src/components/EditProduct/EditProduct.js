@@ -142,7 +142,7 @@ const EditProduct = () => {
             </Col>
             <Col sm={12}>
               <button type="submit" className="btn main-btn">
-                Add Event
+                Edit Product
               </button>
             </Col>
           </Row>
