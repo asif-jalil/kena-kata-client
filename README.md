@@ -18,7 +18,7 @@ If you want to add more feature, simply clone this repo
 
 ```
 git clone https://github.com/Porgramming-Hero-web-course/full-stack-client-asif-jalil.git
-cd react-router
+cd full-stack-client-asif-jalil
 npm install
 ```
 
