@@ -1,11 +1,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
-import "./AddProduct.css";
-import { Container, Alert, Row, Col, Spinner } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Col, Container, Row, Spinner, Alert } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useParams } from "react-router";
 
-const AddProduct = () => {
+const EditProduct = () => {
   const [imgName, setImgName] = useState("");
   const [imgURL, setImgURL] = useState("");
   const [uploadStatus, setUploadStatus] = useState("");
@@ -13,21 +12,27 @@ const AddProduct = () => {
     status: "",
     msg: "",
   });
+  const [productInfo, setProductInfo] = useState({});
+  const { id } = useParams();
+  const { register, handleSubmit, reset } = useForm();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  useEffect(() => {
+    fetch(`http://localhost:5000/loadProduct/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setProductInfo(data);
+        reset();
+      });
+  }, [id]);
 
   const onSubmit = (data, event) => {
     setProductStatus({ status: "", msg: "" });
-    const imgDetails = { ...data, imgURL };
+    const imgDetails = { ...data, imgURL: imgURL || productInfo.imgURL };
 
     if (uploadStatus === "uploading" || uploadStatus === "complete") {
       if (imgURL !== "") {
-        fetch("https://kenakata.herokuapp.com/addProduct", {
-          method: "POST",
+        fetch(`http://localhost:5000/updateProduct/${id}`, {
+          method: "PATCH",
           headers: {
             "Content-Type": "application/json",
           },
@@ -37,22 +42,31 @@ const AddProduct = () => {
           .then((data) => {
             if (data) {
               setProductStatus({ status: "added", msg: "Product Added SuccessFully" });
-              setImgName("");
-              setUploadStatus("");
-              setImgURL("");
-              event.target.reset();
             }
           });
       } else {
         setProductStatus({ status: "imgUploading", msg: "Please wait while image is uploading" });
       }
     } else {
-      setProductStatus({ status: "imgUploading", msg: "Image is not uploaded yet." });
+      fetch(`http://localhost:5000/updateProduct/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(imgDetails),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data) {
+            setProductStatus({ status: "added", msg: "Product Edited SuccessFully" });
+          }
+        });
     }
   };
 
   const handleImageUpload = (event) => {
     setUploadStatus("uploading");
+    setImgURL("");
     let img = event.target.files[0];
     let imgName = new Date().getTime();
     setImgName(img?.name);
@@ -82,22 +96,19 @@ const AddProduct = () => {
             <Col md={6}>
               <div className="mb-3">
                 <label htmlFor="">Product Name</label>
-                <input type="text" className="form-control" {...register("productName", { required: true })} />
-                {errors.productName && <span className="error">This field is required</span>}
+                <input defaultValue={productInfo.productName} type="text" className="form-control" {...register("productName")} />
               </div>
             </Col>
             <Col md={6}>
               <div className="mb-3">
                 <label htmlFor="">Product Weight</label>
-                <input type="text" className="form-control" {...register("productWeight", { required: true })} />
-                {errors.productWeight && <span className="error">This field is required</span>}
+                <input defaultValue={productInfo.productWeight} type="text" className="form-control" {...register("productWeight")} />
               </div>
             </Col>
             <Col md={6}>
               <div className="mb-3">
                 <label htmlFor="">Product Price</label>
-                <input type="number" className="form-control" {...register("productPrice", { required: true })} />
-                {errors.productPrice && <span className="error">This field is required</span>}
+                <input defaultValue={productInfo.productPrice} type="number" className="form-control" {...register("productPrice")} />
               </div>
             </Col>
             <Col md={6}>
@@ -109,6 +120,11 @@ const AddProduct = () => {
                   <input id="product-img" onChange={handleImageUpload} type="file" />
                 </label>
                 <span>{imgName && imgName}</span>
+                {uploadStatus === "" && (
+                  <span>
+                    <img className="position-absolute ml-2" width="50px" src={productInfo.imgURL} alt="" />
+                  </span>
+                )}
                 {uploadStatus && uploadStatus === "uploading" && imgName && (
                   <Spinner className="ml-3" animation="border" role="status">
                     <span className="sr-only">Loading...</span>
@@ -116,10 +132,10 @@ const AddProduct = () => {
                 )}
                 {uploadStatus && uploadStatus === "complete" && imgName && (
                   <>
-                    {/* <FontAwesomeIcon className="fa-2x ml-3 text-success" icon={["fas", "check-circle"]} /> */}
+                    {/* <FontAwesomeIcon className="fa-2x ml-3 text-success" icon={["fas", "check-circle"]} />{" "} */}
                     <span>
                       <img className="position-absolute ml-2" width="50px" src={imgURL} alt="" />
-                    </span>
+                    </span>{" "}
                   </>
                 )}
               </div>
@@ -136,4 +152,4 @@ const AddProduct = () => {
   );
 };
 
-export default AddProduct;
+export default EditProduct;

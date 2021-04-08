@@ -17,11 +17,11 @@ Kena Kata is a **Online Shopping Market** website. The main purpose of this webs
 If you want to add more feature, simply clone this repo
 
 ```
-git clone https://github.com/Porgramming-Hero-web-course/react-auth-asif-jalil.git
+git clone https://github.com/Porgramming-Hero-web-course/full-stack-client-asif-jalil.git
 cd react-router
 npm install
 ```
 
 ## Visit Live Site
 
-If you wanna take a look of my website, [Go Here](https://grabvehicle.netlify.app/)
+If you wanna take a look of my website, [Go Here](https://kenakata.netlify.app/)
