@@ -17,7 +17,7 @@ const EditProduct = () => {
   const { register, handleSubmit, reset } = useForm();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/loadProduct/${id}`)
+    fetch(`https://kenakata.herokuapp.com/loadProduct/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setProductInfo(data);
@@ -31,7 +31,7 @@ const EditProduct = () => {
 
     if (uploadStatus === "uploading" || uploadStatus === "complete") {
       if (imgURL !== "") {
-        fetch(`http://localhost:5000/updateProduct/${id}`, {
+        fetch(`https://kenakata.herokuapp.com/updateProduct/${id}`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
@@ -48,7 +48,7 @@ const EditProduct = () => {
         setProductStatus({ status: "imgUploading", msg: "Please wait while image is uploading" });
       }
     } else {
-      fetch(`http://localhost:5000/updateProduct/${id}`, {
+      fetch(`https://kenakata.herokuapp.com/updateProduct/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
